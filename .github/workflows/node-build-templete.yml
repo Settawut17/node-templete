@@ -1,1 +1,25 @@
+name: NodeJs Build Templete
+on : 
+  workflow_call:
+    inputs:
+      node-version:
+        required: true
+        type: string
+        description: 'The NodeJs version to use for thw buile'
+jobs:
+    Build:
+      runs-on: ubuntu-latest
+      steps:
+        - name : Checkout Code
+          uses: actions/checkout@v4
 
+        - name: Set up Node.js ${{ inputs.node-version}}
+          uses: actions/setup-node@v4
+          with:
+            node-version: ${{ inputs.node-version}}
+
+        - name: Install dependencies
+          run: npm install
+
+        - name: Run tests
+          run: npm test

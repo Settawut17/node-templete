@@ -1,11 +1,19 @@
 name: NodeJs Build Templete
-on : 
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
   workflow_call:
     inputs:
       node-version:
         required: true
         type: string
         description: 'The NodeJs version to use for thw buile'
+
 jobs:
     Build:
       runs-on: ubuntu-latest
